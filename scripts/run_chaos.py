@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from reliability_lab.chaos import load_queries, run_simulation
 from reliability_lab.config import load_config

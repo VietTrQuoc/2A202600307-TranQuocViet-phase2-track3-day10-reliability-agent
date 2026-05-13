@@ -1,0 +1,22 @@
+Verification run on 2026-05-13
+
+Command: pytest -q
+Result:
+...........X                                                             [100%]
+11 passed, 1 xpassed in 1.72s
+
+Command: ruff check src tests scripts
+Result:
+All checks passed.
+
+Command: mypy src
+Result:
+Success: no issues found in 8 source files
+
+Command: python scripts/run_chaos.py --config configs/default.yaml --out reports/metrics.json
+Result:
+wrote reports/metrics.json
+
+Command: python scripts/generate_report.py --metrics reports/metrics.json --out reports/final_report.md
+Result:
+wrote reports/final_report.md

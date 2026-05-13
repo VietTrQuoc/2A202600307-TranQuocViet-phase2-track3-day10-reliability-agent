@@ -21,6 +21,12 @@ class RunMetrics(BaseModel):
     estimated_cost_saved: float = 0.0
     latencies_ms: list[float] = Field(default_factory=list)
     scenarios: dict[str, str] = Field(default_factory=dict)
+    route_counts: dict[str, int] = Field(default_factory=dict)
+    provider_counts: dict[str, int] = Field(default_factory=dict)
+    cache_false_hits: int = 0
+    scenario_metrics: dict[str, dict[str, object]] = Field(default_factory=dict)
+    cache_comparison: dict[str, dict[str, object]] = Field(default_factory=dict)
+    redis_evidence: dict[str, object] = Field(default_factory=dict)
 
     @property
     def availability(self) -> float:
@@ -57,6 +63,12 @@ class RunMetrics(BaseModel):
             "estimated_cost": round(self.estimated_cost, 6),
             "estimated_cost_saved": round(self.estimated_cost_saved, 6),
             "scenarios": self.scenarios,
+            "route_counts": self.route_counts,
+            "provider_counts": self.provider_counts,
+            "cache_false_hits": self.cache_false_hits,
+            "scenario_metrics": self.scenario_metrics,
+            "cache_comparison": self.cache_comparison,
+            "redis_evidence": self.redis_evidence,
         }
 
     def write_json(self, path: str | Path) -> None:
